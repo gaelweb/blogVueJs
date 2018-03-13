@@ -1,21 +1,27 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import HelloWorld from '@/components/HomeBlog'
-import form from '@/components/FormBlog'
+import FormBlog from '@/components/FormBlog'
+import BackOffice from '@/components/BackOffice'
 
 Vue.use(Router)
 
 export default new Router({
   routes: [
     {
-      path: '/',
+      path: '/home',
       name: 'HomeBlog',
       component: HelloWorld
     },
     {
-      path: '/FormBlog',
+      path: '/admin/FormBlog',
       name: 'FormBlog',
-      component: form
+      component: FormBlog
+    },
+    {
+      path: '/admin',
+      name: 'BackOffice',
+      component: BackOffice
     }
   ]
 })

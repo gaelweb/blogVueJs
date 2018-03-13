@@ -1,15 +1,14 @@
 <template>
   <div id="app">
-    <img src="./assets/logo.png">
-      <ul class="nav">
-        <li class="nav-item">
-          <router-link to="/" class="nav-link">Home</router-link>
-        </li>
-        <li class="nav-item">
-          <router-link to="/FormBlog" class="nav-link">Formulaire</router-link>
-        </li>
-      </ul>
-    <router-view/>
+    <ul class="nav">
+      <li class="nav-item">
+        <router-link to="/home" class="nav-link">Home</router-link>
+      </li>
+      <li class="nav-item">
+        <router-link to="/admin" class="nav-link">Admin</router-link>
+      </li>
+    </ul>
+    <router-view></router-view>
   </div>
 </template>
 
