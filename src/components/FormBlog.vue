@@ -6,7 +6,7 @@
         <label for="title">Titre de l'article</label>
         <input v-model="form.title" class="form-control-lg" placeholder="titre de l'article" type="text" name="title" id="title">
       </div>
-      <button @click.prevent="formSave()" class="btn btn-primary" type="submit">Enregister</button>
+      <button @click="formSave()" class="btn btn-primary" type="submit">Enregister</button>
     </form>
   </div>
 </template>
@@ -36,7 +36,9 @@ export default {
   data () {
     return {
       blog_msg: 'Formulaire',
-      form: { title: ''}
+      form: [
+        { title: ''}
+      ]
     }
   },
   methods: {
@@ -45,8 +47,31 @@ export default {
       toastr.success('Titre ajouté !')
     },
     deleteTitle (index) {
-      this.titleFirebase.splice(index, 1)
-      toastr.success('Titre supprimé !')
+      try{
+        titleRef.child(index).remove()
+        toastr.success('Titre supprimé !')
+      }catch(e){
+        console.log('erreur :', e)
+      }
+      // .remove() //pour supprimer dans firebase
+      // toastr.success('Titre supprimé !')
+    },
+    editFile (index) {
+      try{
+        titleRef.child(index).update({ edit: true })
+        toastr.success('Titre modifié !')
+      }catch(e){
+        console.log('erreur edition :', e)
+      }
+    },
+    saveEdit (index) {
+      const key = index['.key']
+      try{
+        titleRef.child(key).set({ name: index.name, edit:false })
+        toastr.success('Titre sauvegardé !')
+      }catch(e){
+        console.log('erreur funciton saveEdit() :', e)
+      }
     }
   }
 }

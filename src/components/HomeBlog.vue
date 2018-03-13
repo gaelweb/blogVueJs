@@ -3,10 +3,20 @@
     <h1>{{ msg }}</h1>
     <div class="container">
       <h1>{{ form.title }}</h1>
-      <p v-for="titlesF of titleFirebase">
-        {{ titlesF.name }}
-        <button @click.prevent="deleteTitle(titlesF.name)" class="btn btn-warning" type="submit">Supprimer</button>
-      </p>
+      <ul>
+        <li v-for="titlesF of titleFirebase" v-bind:key="titlesF['.key']">
+          <div v-if="!titlesF.edit">
+            {{ titlesF.name }}
+            <button @click.prevent="editFile(titlesF['.key'])" class="btn btn-warning" type="button">Editer</button>
+            <button @click.prevent="deleteTitle(titlesF['.key'])" class="btn btn-warning" type="button">Supprimer</button>
+          </div>
+          <div v-else>
+            <input type="text" v-model="titlesF.name">
+            <button @click.prevent="saveEdit(titlesF)" class="btn btn-primary" type="button">Modifier</button>
+            <button @click.prevent="deleteTitle(titlesF['.key'])" class="btn btn-warning" type="button">Supprimer</button>
+          </div>
+        </li>
+      </ul>
     </div>
   </div>
 </template>
