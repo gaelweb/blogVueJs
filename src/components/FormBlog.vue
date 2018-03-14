@@ -9,6 +9,7 @@
         <!-- Formulaire -->
         <div class="col-md-6">
           <form>
+            <!-- <input type="hidden" v-model="form.id" name="id"> -->
             <div class="form-group row">
               <label for="title">Titre de l'article</label>
               <input v-model="form.title" class="form-control" placeholder="titre de l'article" type="text" name="title" id="title">
@@ -32,40 +33,43 @@
     <table class="table">
       <thead class="thead-light">
         <tr>
-          <th scope="col">#</th>
+          <th scope="col">N°</th>
           <th scope="col">Titre de l'article</th>
           <th scope="col">Paragraphe de l'article</th>
           <th scope="col">Modifier l'article</th>
           <th scope="col">Supprimer l'article</th>
         </tr>
       </thead>
-      <tbody v-for="article of BlogFirebase" v-bind:key="article['.key']">
-        <tr v-if="!article.edit">
-          <th scope="row">{{ article.id }}</th>
-          <th scope="row">{{ article.titleArticle }}</th>
-          <th scope="row">{{ article.contentArticle }}</th>
+      <!-- <p v-for="(value, key, index) in BlogFirebase">
+        {{ value }}
+      </p> -->
+      <tbody v-for="(value, key, index) of BlogFirebase" v-bind:key="value['.key']">
+        <tr v-if="!value.edit">
+          <th scope="row">{{ key }}</th>
+          <th scope="row">{{ value.titleArticle }}</th>
+          <th scope="row">{{ value.contentArticle }}</th>
           <th scope="row">
-            <button @click.prevent="editFile(article['.key'])" class="btn btn-primary" type="button">
+            <button @click.prevent="editFile(value['.key'])" class="btn btn-primary" type="button">
               <i class="far fa-edit"></i>
             </button>
           </th>
           <th scope="row">
-            <button @click.prevent="deleteTitle(article['.key'])" class="btn btn-danger" type="button">
+            <button @click.prevent="deleteTitle(value['.key'])" class="btn btn-danger" type="button">
               <i class="fas fa-trash"></i>
             </button>
           </th>
         </tr>
         <tr v-else>
-          <th>{{ article.id }}</th>
+          <th>{{ value.id }}</th>
           <th>
-            <input type="text" v-model="article.titleArticle">
-            <button class="btn btn-primary" @click.prevent="saveEdit(article)" type="button">
+            <input type="text" v-model="value.titleArticle">
+            <button class="btn btn-primary" @click.prevent="saveEdit(value)" type="button">
               <i class="far fa-edit"></i>
             </button>
           </th>
           <th>
-            <input type="text" v-model="article.contentArticle">
-            <button class="btn btn-primary" @click.prenvent="saveEdit(article)" type="button">
+            <input type="text" v-model="value.contentArticle">
+            <button class="btn btn-primary" @click.prenvent="saveEdit(value)" type="button">
               <i class="far fa-edit"></i>
             </button>
           </th>
@@ -102,7 +106,6 @@ export default {
   data () {
     return {
       blog_msg: 'Formulaire',
-      counter: [],
       form: [
         {
           title: '',
@@ -116,7 +119,6 @@ export default {
     formSave () {
       BlogDb.push(
         {
-          id: this.counter++,
           titleArticle: this.form.title,
           contentArticle: this.form.paragraphe,
           edit:false
