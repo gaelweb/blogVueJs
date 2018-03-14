@@ -1,15 +1,22 @@
 <template>
-  <div class="hello">
-    <h1>{{ msg }}</h1>
-    <div class="container">
-      <h1>{{ form.title }}</h1>
-      <ul>
-        <li v-for="titlesF of titleFirebase" v-bind:key="titlesF['.key']">
-            {{ titlesF.name }}
-        </li>
-      </ul>
+  <section>
+    <div class="hello">
+      <h1>{{ msg }}</h1>
+      <div class="container">
+        <div class="row">
+          <div v-for="article of BlogFirebase" v-bind:key="article['.key']" class="col-md-6">
+            <div class="card" style="width: 20rem;">
+              <img class="card-img-top" src="../assets/logo.png" alt="">
+              <div class="card-body">
+                <h5 class="card-title">{{ article.titleArticle }}</h5>
+                <p class="card-text">{{ article.contentArticle }}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-  </div>
+  </section>
 </template>
 
 <script>
