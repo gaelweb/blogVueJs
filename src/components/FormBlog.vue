@@ -21,10 +21,10 @@
             </div>
             <div class="form-group row">
               <label for="image">Ajouter une image</label>
-              <img v-bind:src="imagePreview" style="width: 15em; height:15em; border: 1px solid red" alt="">
-              <input id="file" ref="fileInput" @change="handleFileSelected" class="form-control-file" type="file" accept="image/*">
+              <img @click.prevent="openUpload" style="width: 15em; height:15em;border: 1px solid black" @dragover.prevent @drop="dropUpload" v-bind:src="imagePreview">
+              <input @change="handleFileSelected" type="file" id="file-field" style="display: none" name="image">
             </div>
-            <button @click.prevent="formSave()" class="btn btn-primary" type="submit">Enregister</button>
+            <button @click="formSave()" class="btn btn-primary" type="submit">Enregister</button>
           </form>
         </div>
 
@@ -50,18 +50,19 @@
           <th scope="col">N°</th>
           <th scope="col">Titre de l'article</th>
           <th scope="col">Paragraphe de l'article</th>
+          <th scope="col">Image de l'article</th>
           <th scope="col">Modifier l'article</th>
           <th scope="col">Supprimer l'article</th>
         </tr>
       </thead>
-      <!-- <p v-for="(value, key, index) in BlogFirebase">
-        {{ value }}
-      </p> -->
       <tbody v-for="(value, key, index) of BlogFirebase" v-bind:key="value['.key']">
         <tr v-if="!value.edit">
           <th scope="row">{{ key }}</th>
           <th scope="row">{{ value.titleArticle }}</th>
           <th scope="row">{{ value.contentArticle }}</th>
+          <th scope="row">
+            <img :src="value.imageArticle" style="width: 50px; height: 50px" alt="">
+          </th>
           <th scope="row">
             <button @click.prevent="editFile(value['.key'])" class="btn btn-primary" type="button">
               <i class="far fa-edit"></i>
@@ -125,23 +126,45 @@ export default {
       form: [
         {
           title: '',
-          paragraphe: '',
-          // fileInput : '../assets/default_image.jpg'
+          paragraphe: ''
         }
       ]
     }
   },
   methods: {
+    //methode pour ouvrir une input a partir d'une image
+    openUpload () {
+      document.getElementById('file-field').click()
+    },
+    //Drag and Drop d'une image
+    dropUpload (ev) {
+      ev.stopPropagation()
+      ev.preventDefault()
+      var picsUpload = ev.dataTransfer.files
+      this.createdFile(picsUpload[0])
+    },
+    createdFile (el) {
+      var img = new Image()
+      var reader = new FileReader()
+
+      reader.onload = (el) => {
+        this.imagePreview = el.target.result
+      }
+      reader.readAsDataURL(el)
+    },
+    //Suppression du fichier
+    removeFile (e) {
+      this.imagePreview = ''
+    },
     // Vérification d'une image en upload
     handleFileSelected (el) {
       var reader,
           files = el.target.files
 
-      //Vérification qu'un fichier est dedans
+      //Vérification qu'un fichier est saisie
       if (files.length === 0){
         console.log("empty files")
       }
-
       reader = new FileReader()
       reader.onload = (el) => {
         this.imagePreview = el.target.result
@@ -151,16 +174,6 @@ export default {
     },
     // Sauvegarde d'un article et push() dans firebase
     formSave () {
-      // let refImage = this.form.fileInput.name
-      // let file = this.form.fileInput
-      // let metadata = {
-      //   contentType: this.form.fileInput.type
-      // }
-      // console.log(this.form.fileInput.name)
-      //stockage des images dans firebase
-      // const storageFile = storage.ref(refImage).put(file, metadata)
-      // console.log(storageFile)
-      // // //push des data text (titre et paragraphe)
       BlogDb.push(
         {
           titleArticle: this.form.title,
@@ -197,6 +210,7 @@ export default {
         BlogDb.child(key).set({
           titleArticle: index.titleArticle,
           contentArticle: index.contentArticle,
+          imageArticle: index.imageArticle,
           edit:false
         })
         toastr.success('Article modifié !')
