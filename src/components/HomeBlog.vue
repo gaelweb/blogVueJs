@@ -5,8 +5,8 @@
       <div class="container">
         <div class="row">
           <div v-for="article of BlogFirebase" v-bind:key="article['.key']" class="col-md-6">
-            <div class="card" style="width: 20rem;">
-              <img class="card-img-top" src="../assets/logo.png" alt="">
+            <div class="card" style="width: 14rem;">
+              <img class="card-img-top" :src="article.imageArticle" alt="article.imageArticle">
               <div class="card-body">
                 <h5 class="card-title">{{ article.titleArticle }}</h5>
                 <p class="card-text">{{ article.contentArticle }}</p>

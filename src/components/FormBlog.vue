@@ -9,6 +9,7 @@
 
         <!-- Formulaire -->
         <div class="col-md-6">
+          <h3>Ajouter un article</h3>
           <form>
             <div class="form-group row">
               <label for="title">Titre de l'article</label>
@@ -20,6 +21,7 @@
             </div>
             <div class="form-group row">
               <label for="image">Ajouter une image</label>
+              <img v-bind:src="imagePreview" style="width: 15em; height:15em; border: 1px solid red" alt="">
               <input id="file" ref="fileInput" @change="handleFileSelected" class="form-control-file" type="file" accept="image/*">
             </div>
             <button @click.prevent="formSave()" class="btn btn-primary" type="submit">Enregister</button>
@@ -27,15 +29,16 @@
         </div>
 
         <!-- Rendu formulaire html -->
-        <!-- <div class="col-md-6">
-          <div class="card" style="width: 15rem;">
-            <img class="card-img-top" src="../assets/logo.png" alt="">
+        <div class="col-md-6">
+          <h3>Rendu sur le site</h3>
+          <div class="card" style="width: auto">
+            <img class="card-img-top" v-bind:src="imagePreview" alt="">
             <div class="card-body">
               <h5 class="card-title">{{ form.title }}</h5>
               <p class="card-text">{{ form.paragraphe }}</p>
             </div>
           </div>
-        </div> -->
+        </div>
       </div>
     </div>
 
@@ -118,37 +121,51 @@ export default {
   data () {
     return {
       blog_msg: 'Formulaire',
+      imagePreview: '../assets/default_image.jpg',
       form: [
         {
           title: '',
           paragraphe: '',
-          fileInput : ''
+          // fileInput : '../assets/default_image.jpg'
         }
       ]
     }
   },
   methods: {
     // Vérification d'une image en upload
-    handleFileSelected (event) {
-      this.form.fileInput = event.target.files[0]
-      console.log(this.form.fileInput)
+    handleFileSelected (el) {
+      var reader,
+          files = el.target.files
+
+      //Vérification qu'un fichier est dedans
+      if (files.length === 0){
+        console.log("empty files")
+      }
+
+      reader = new FileReader()
+      reader.onload = (el) => {
+        this.imagePreview = el.target.result
+      }
+      //Method readAsDataURL permet de lire le contenu de l'objet file
+      reader.readAsDataURL(files[0])
     },
     // Sauvegarde d'un article et push() dans firebase
     formSave () {
-      let refImage = this.form.fileInput.name
-      let file = this.form.fileInput
-      let metadata = {
-        contentType: this.form.fileInput.type
-      }
-      console.log(this.form.fileInput.name)
+      // let refImage = this.form.fileInput.name
+      // let file = this.form.fileInput
+      // let metadata = {
+      //   contentType: this.form.fileInput.type
+      // }
+      // console.log(this.form.fileInput.name)
       //stockage des images dans firebase
-      const storageFile = storage.ref(refImage).put(file, metadata)
-      console.log(storageFile)
-      // //push des data text (titre et paragraphe)
+      // const storageFile = storage.ref(refImage).put(file, metadata)
+      // console.log(storageFile)
+      // // //push des data text (titre et paragraphe)
       BlogDb.push(
         {
           titleArticle: this.form.title,
           contentArticle: this.form.paragraphe,
+          imageArticle: this.imagePreview,
           edit:false
         }
       )
