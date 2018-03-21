@@ -21,7 +21,7 @@
             </div>
             <div class="form-group row">
               <label for="image">Ajouter une image</label>
-              <img @click.prevent="openUpload" style="width: 15em; height:15em;border: 1px solid black" @dragover.prevent @drop="dropUpload" v-bind:src="imagePreview">
+              <img @click="openUpload" style="width: 15em; height:15em;border: 1px solid black" @dragover.prevent @drop="dropUpload" :src="imagePreview">
               <input @change="handleFileSelected" type="file" id="file-field" style="display: none" name="image">
             </div>
             <button @click="formSave()" class="btn btn-primary" type="submit">Enregister</button>

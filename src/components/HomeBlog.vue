@@ -4,9 +4,9 @@
       <h1>{{ msg }}</h1>
       <div class="container">
         <div class="row">
-          <div v-for="article of BlogFirebase" v-bind:key="article['.key']" class="col-md-6">
-            <div class="card" style="width: 14rem;">
-              <img class="card-img-top" :src="article.imageArticle" alt="article.imageArticle">
+          <div v-for="article of BlogFirebase" v-bind:key="article['.key']" class="col-md-12 col-sm-12">
+            <div class="card" style="">
+              <img style="max-height: 250px;" class="card-img-top" :src="article.imageArticle" alt="article.imageArticle">
               <div class="card-body">
                 <h5 class="card-title">{{ article.titleArticle }}</h5>
                 <p class="card-text">{{ article.contentArticle }}</p>
@@ -38,7 +38,7 @@ export default {
 h1, h2 {
   font-weight: normal;
 }
-ul {
+/* ul {
   list-style-type: none;
   padding: 0;
 }
@@ -48,5 +48,5 @@ li {
 }
 a {
   color: #42b983;
-}
+} */
 </style>
