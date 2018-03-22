@@ -106,7 +106,8 @@ header {
 }
 .sup-article > span {
   position: absolute;
-  left: 8px;
+  right: 8px;
+  padding: 8px 0 0 0
 }
 .img-article {
   height: 100%;
@@ -121,5 +122,6 @@ header {
   padding: 50px 0px 50px 0px;
   white-space: pre-wrap;
   border: 1px solid #80808026;
+  margin: 25px 0 25px 0;
 }
 </style>

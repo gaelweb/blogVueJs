@@ -26,7 +26,9 @@
               <img @click="openUpload" style="width: 15em; height:15em;border: 1px solid black" @dragover.prevent @drop="dropUpload" :src="imagePreview">
               <input @change="handleFileSelected" type="file" id="file-field" style="display: none" name="image">
             </div>
-            <button @click="formSave()" class="btn btn-primary" type="submit">Enregister</button>
+            <button @click.prevent="formSave()" class="btn btn-primary" type="submit">Enregister</button>
+            <!-- Ajout d'un bouton reset -->
+            <button @click.prevent="resetForm()" class="btn btn-warning" type="submit" name="button">Réinitialiser le formulaire</button>
           </form>
         </div>
 
@@ -34,7 +36,7 @@
         <div class="col-md-6">
           <h3>Rendu sur le site</h3>
           <div class="card" style="width: auto">
-            <img class="card-img-top" v-bind:src="imagePreview" alt="">
+            <img class="card-img-top" :src="imagePreview" alt="">
             <div class="card-body">
               <h5 class="card-title">{{ form.title }}</h5>
               <p class="card-text">{{ form.paragraphe }}</p>
@@ -151,7 +153,6 @@ export default {
         this.imagePreview = el.target.result
       }
       reader.readAsDataURL(el)
-      // el.target.reset()
     },
     //Drag and Drop d'une image
     dropUpload (ev) {
@@ -179,7 +180,6 @@ export default {
       }
       //Method readAsDataURL permet de lire le contenu de l'objet file
       reader.readAsDataURL(files[0])
-      el.target.reset()
     },
     // Sauvegarde d'un article et push() dans firebase
     formSave () {
@@ -193,6 +193,16 @@ export default {
         }
       )
       toastr.success('Article ajouté !')
+    },
+    // Reset le formulaire avec un bouton
+    resetForm () {
+      if (this.form.title != '' || this.form.paragraphe != '' || this.imagePreview != '') {
+        this.form.title = ''
+        this.form.paragraphe = ''
+        this.imagePreview = ''
+      }else{
+        console.log('le form est vide')
+      }
     },
     // Suppression d'un article et dans firebase
     deleteTitle (index) {

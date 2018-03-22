@@ -21,6 +21,9 @@ export default {
 </script>
 
 <style>
+/* body {
+  background: linear-gradient(to right, #89216B, #DA4453);
+} */
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
