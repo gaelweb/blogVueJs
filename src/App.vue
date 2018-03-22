@@ -5,7 +5,7 @@
         <router-link to="/home" class="nav-link">Home</router-link>
       </li>
       <li class="nav-item">
-        <router-link to="/admin" class="nav-link nav-link-admin">Admin</router-link>
+        <router-link to="/admin/FormBlog" class="nav-link nav-link-admin">Admin</router-link>
       </li>
     </ul>
     <router-view></router-view>
@@ -13,6 +13,8 @@
 </template>
 
 <script>
+import FormBlog from './components/FormBlog'
+
 export default {
   name: 'App'
 }

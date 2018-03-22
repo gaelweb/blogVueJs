@@ -5,7 +5,7 @@
         <div class="container">
           <div class="intro-text">
             <div class="intro-heading-text">
-              Blog en Vue Js
+              Blog en Vue <img src="../assets/logo.png" width:="150px" height="150px" alt="">
             </div>
           </div>
         </div>
@@ -21,7 +21,6 @@
             <p class="card-text text-article">{{ article.contentArticle }}</p>
             <div class="sup-article">
               <span>Publié le : {{ article.dateArticle }}</span><br>
-              <span>poster par:</span>
             </div>
           </div>
         </div>
@@ -89,6 +88,7 @@ header {
 }
 .container-home {
   background-color: #fff;
+  border-radius: 5px;
 }
 .title-article {
   border-bottom: 1px solid gray;
@@ -116,7 +116,10 @@ header {
   background-repeat: no-repeat;
 }
 .row-article {
-  margin-bottom: 50px;
+  /* padding-top: 50px;
+  padding-bottom: 50px; */
+  padding: 50px 0px 50px 0px;
+  white-space: pre-wrap;
   border: 1px solid #80808026;
 }
 </style>

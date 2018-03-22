@@ -2,11 +2,13 @@
 
   <!-- Formulaire d'ajout des articles -->
   <div id="formBlog">
-    <h1>{{ blog_msg }}</h1>
+    <!-- Notifications du nombre d'articles publiés -->
+    <button type="button" class="btn btn-info" disabled>
+      Articles publiées : <span class="badge badge-light">4</span>
+    </button>
 
     <div class="container">
       <div class="row">
-
         <!-- Formulaire -->
         <div class="col-md-6">
           <h3>Ajouter un article</h3></br>
@@ -93,6 +95,8 @@
         </tr>
       </tbody>
     </table>
+
+    <!-- router -->
     <router-view></router-view>
   </div>
 </template>
@@ -139,13 +143,6 @@ export default {
     openUpload () {
       document.getElementById('file-field').click()
     },
-    //Drag and Drop d'une image
-    dropUpload (ev) {
-      ev.stopPropagation()
-      ev.preventDefault()
-      var picsUpload = ev.dataTransfer.files
-      this.createdFile(picsUpload[0])
-    },
     createdFile (el) {
       var img = new Image()
       var reader = new FileReader()
@@ -154,7 +151,14 @@ export default {
         this.imagePreview = el.target.result
       }
       reader.readAsDataURL(el)
-      el.target.reset()
+      // el.target.reset()
+    },
+    //Drag and Drop d'une image
+    dropUpload (ev) {
+      ev.stopPropagation()
+      ev.preventDefault()
+      var picsUpload = ev.dataTransfer.files
+      this.createdFile(picsUpload[0])
     },
     //Suppression du fichier
     removeFile (e) {
