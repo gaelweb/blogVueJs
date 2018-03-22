@@ -9,8 +9,9 @@
 
         <!-- Formulaire -->
         <div class="col-md-6">
-          <h3>Ajouter un article</h3>
+          <h3>Ajouter un article</h3></br>
           <form>
+            <input type="hidden" :value="date_article">
             <div class="form-group row">
               <label for="title">Titre de l'article</label>
               <input v-model="form.title" class="form-control" placeholder="titre de l'article" type="text" name="title" id="title">
@@ -20,7 +21,6 @@
               <textarea v-model="form.paragraphe" class="form-control" placeholder="Description de l'article"  name="paragraphe" id="paragraphe" rows="4" cols="40"></textarea>
             </div>
             <div class="form-group row">
-              <label for="image">Ajouter une image</label>
               <img @click="openUpload" style="width: 15em; height:15em;border: 1px solid black" @dragover.prevent @drop="dropUpload" :src="imagePreview">
               <input @change="handleFileSelected" type="file" id="file-field" style="display: none" name="image">
             </div>
@@ -51,6 +51,7 @@
           <th scope="col">Titre de l'article</th>
           <th scope="col">Paragraphe de l'article</th>
           <th scope="col">Image de l'article</th>
+          <th scope="col">Date de publication</th>
           <th scope="col">Modifier l'article</th>
           <th scope="col">Supprimer l'article</th>
         </tr>
@@ -63,6 +64,7 @@
           <th scope="row">
             <img :src="value.imageArticle" style="width: 50px; height: 50px" alt="">
           </th>
+          <th scope="row">{{ value.dateArticle }}</th>
           <th scope="row">
             <button @click.prevent="editFile(value['.key'])" class="btn btn-primary" type="button">
               <i class="far fa-edit"></i>
@@ -123,6 +125,7 @@ export default {
     return {
       blog_msg: 'Formulaire',
       imagePreview: '../assets/default_image.jpg',
+      date_article: new Date().toLocaleDateString(),
       form: [
         {
           title: '',
@@ -151,6 +154,7 @@ export default {
         this.imagePreview = el.target.result
       }
       reader.readAsDataURL(el)
+      el.target.reset()
     },
     //Suppression du fichier
     removeFile (e) {
@@ -171,6 +175,7 @@ export default {
       }
       //Method readAsDataURL permet de lire le contenu de l'objet file
       reader.readAsDataURL(files[0])
+      el.target.reset()
     },
     // Sauvegarde d'un article et push() dans firebase
     formSave () {
@@ -179,6 +184,7 @@ export default {
           titleArticle: this.form.title,
           contentArticle: this.form.paragraphe,
           imageArticle: this.imagePreview,
+          dateArticle: this.date_article,
           edit:false
         }
       )
@@ -211,6 +217,7 @@ export default {
           titleArticle: index.titleArticle,
           contentArticle: index.contentArticle,
           imageArticle: index.imageArticle,
+          dateArticle: index.dateArticle,
           edit:false
         })
         toastr.success('Article modifié !')

@@ -1,16 +1,27 @@
 <template>
-  <section>
+  <section class="vue-home">
     <div class="hello">
-      <h1>{{ msg }}</h1>
-      <div class="container">
-        <div class="row">
-          <div v-for="article of BlogFirebase" v-bind:key="article['.key']" class="col-md-12 col-sm-12">
-            <div class="card" style="">
-              <img style="max-height: 250px;" class="card-img-top" :src="article.imageArticle" alt="article.imageArticle">
-              <div class="card-body">
-                <h5 class="card-title">{{ article.titleArticle }}</h5>
-                <p class="card-text">{{ article.contentArticle }}</p>
-              </div>
+      <header>
+        <div class="container">
+          <div class="intro-text">
+            <div class="intro-heading-text">
+              Blog en Vue Js
+            </div>
+          </div>
+        </div>
+      </header>
+      <div class="container container-home">
+        <div v-for="article of BlogFirebase" v-bind:key="article['.key']" class="row row-article">
+          <div class="col-md-6">
+            <div class="img-article" v-bind:style="{ backgroundImage: 'url('+ article.imageArticle +')'}">
+            </div>
+          </div>
+          <div class="content-article col-md-6">
+            <h5 class="card-title title-article">{{ article.titleArticle }}</h5>
+            <p class="card-text text-article">{{ article.contentArticle }}</p>
+            <div class="sup-article">
+              <span>Publié le : {{ article.dateArticle }}</span><br>
+              <span>poster par:</span>
             </div>
           </div>
         </div>
@@ -38,15 +49,74 @@ export default {
 h1, h2 {
   font-weight: normal;
 }
-/* ul {
-  list-style-type: none;
-  padding: 0;
+header {
+  text-align: center;
+  color: #fff;
+  height: 100vh;
+  width: 100%;
 }
-li {
-  display: inline-block;
-  margin: 0 10px;
+.intro-text {
+  padding-top: 150px;
+  padding-bottom: 100px;
 }
-a {
-  color: #42b983;
-} */
+@media (min-width: 768px) {
+  .intro-text {
+    padding-top: 300px;
+    padding-bottom: 200px;
+  }
+}
+.intro-heading-text {
+  font-size: 50px;
+  font-weight: 700;
+  line-height: 50px;
+  margin-bottom: 25px;
+}
+@media (min-width: 768px) {
+  .intro-heading-text {
+    font-size: 75px;
+    font-weight: 700;
+    line-height: 75px;
+    margin-bottom: 50px;
+  }
+}
+.vue-home {
+  background: #DA4453;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #89216B, #DA4453);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #89216B, #DA4453); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+.nav-link {
+  color: #fff;
+}
+.container-home {
+  background-color: #fff;
+}
+.title-article {
+  border-bottom: 1px solid gray;
+  padding: 16px;
+  text-transform: uppercase;
+}
+.text-article {
+  text-align: justify;
+}
+.sup-article {
+  width: 100%;
+  border-top: 1px solid gray;
+  position: relative;
+  min-height: 60px;
+}
+.sup-article > span {
+  position: absolute;
+  left: 8px;
+}
+.img-article {
+  height: 100%;
+  width: 100%;
+  background-size: contain;
+  background-position: center center;
+  background-repeat: no-repeat;
+}
+.row-article {
+  margin-bottom: 50px;
+  border: 1px solid #80808026;
+}
 </style>
