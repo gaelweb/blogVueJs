@@ -3,16 +3,13 @@
   <!-- Formulaire d'ajout des articles -->
   <div id="formBlog">
     <!-- Notifications du nombre d'articles publiés -->
-    <button type="button" class="btn btn-info" disabled>
-      Articles publiées : <span class="badge badge-light">4</span>
-    </button>
 
     <div class="container">
       <div class="row">
         <!-- Formulaire -->
         <div class="col-md-6">
           <h3>Ajouter un article</h3></br>
-          <form>
+          <form id="form-blog">
             <input type="hidden" :value="date_article">
             <div class="form-group row">
               <label for="title">Titre de l'article</label>
@@ -178,6 +175,7 @@ export default {
       reader.onload = (el) => {
         this.imagePreview = el.target.result
       }
+
       //Method readAsDataURL permet de lire le contenu de l'objet file
       reader.readAsDataURL(files[0])
     },
@@ -196,12 +194,19 @@ export default {
     },
     // Reset le formulaire avec un bouton
     resetForm () {
-      if (this.form.title != '' || this.form.paragraphe != '' || this.imagePreview != '') {
-        this.form.title = ''
-        this.form.paragraphe = ''
-        this.imagePreview = ''
+      if(this.form.title == null || this.form.title == ''){
       }else{
-        console.log('le form est vide')
+        this.form.title = ''
+      }
+
+      if(this.form.paragraphe == null || this.form.paragraphe == ''){
+      }else{
+        this.form.paragraphe = ''
+      }
+
+      if(this.imagePreview != '../assets/default_image.jpg'){
+        this.imagePreview = '../assets/default_image.jpg'
+      }else{
       }
     },
     // Suppression d'un article et dans firebase

@@ -9,7 +9,7 @@ Vue.use(Router)
 export default new Router({
   routes: [
     {
-      path: '/home',
+      path: '/',
       name: 'HomeBlog',
       component: HelloWorld
     },
@@ -18,11 +18,5 @@ export default new Router({
       name: 'FormBlog',
       component: FormBlog
     }
-    // ,
-    // {
-    //   path: '/admin',
-    //   name: 'BackOffice',
-    //   component: BackOffice
-    // }
   ]
 })
