@@ -13,6 +13,7 @@
     </ul>
     <div class="container">
       <div class="row">
+        
         <!-- Formulaire -->
         <div class="col-md-6">
           <h3>Ajouter un article</h3></br>
@@ -47,6 +48,7 @@
             </div>
           </div>
         </div>
+
       </div>
     </div>
 
@@ -188,16 +190,20 @@ export default {
     },
     // Sauvegarde d'un article et push() dans firebase
     formSave () {
-      BlogDb.push(
-        {
-          titleArticle: this.form.title,
-          contentArticle: this.form.paragraphe,
-          imageArticle: this.imagePreview,
-          dateArticle: this.date_article,
-          edit:false
-        }
-      )
-      toastr.success('Article ajouté !')
+      if (this.imagePreview == '') {
+        toastr.warning('Veuillez ajouter une image')
+      }else{
+        BlogDb.push(
+          {
+            titleArticle: this.form.title,
+            contentArticle: this.form.paragraphe,
+            imageArticle: this.imagePreview,
+            dateArticle: this.date_article,
+            edit:false
+          }
+        )
+        toastr.success('Article ajouté !')
+      }
     },
     // Reset le formulaire avec un bouton
     resetForm () {

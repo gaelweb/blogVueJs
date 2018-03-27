@@ -53,6 +53,12 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+body{
+  background: #DA4453;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #89216B, #DA4453);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #89216B, #DA4453); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+}
 h1, h2 {
   font-weight: normal;
 }
@@ -95,8 +101,14 @@ header {
   color: #fff;
 }
 .container-home {
-  background-color: #fff;
   border-radius: 5px;
+}
+.container-home > div {
+  background-color: #fff;
+  -webkit-box-shadow: -2px 9px 34px 0px rgba(0,0,0,0.75);
+  -moz-box-shadow: -2px 9px 34px 0px rgba(0,0,0,0.75);
+  box-shadow: -2px 9px 34px 0px rgba(0,0,0,0.75);
+  border-radius: 3px;
 }
 .title-article {
   border-bottom: 1px solid gray;
@@ -130,6 +142,6 @@ header {
   padding: 50px 0px 50px 0px;
   white-space: pre-wrap;
   border: 1px solid #80808026;
-  margin: 25px 0 25px 0;
+  margin: 55px 0 55px 0;
 }
 </style>
