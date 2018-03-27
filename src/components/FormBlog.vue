@@ -3,7 +3,14 @@
   <!-- Formulaire d'ajout des articles -->
   <div id="formBlog">
     <!-- Notifications du nombre d'articles publiés -->
-
+    <ul class="nav nav-blog">
+      <li class="nav-item">
+        <router-link to="/" class="nav-link">Home</router-link>
+      </li>
+      <li class="nav-item">
+        <router-link to="/admin/FormBlog" class="nav-link nav-link-admin">Admin</router-link>
+      </li>
+    </ul>
     <div class="container">
       <div class="row">
         <!-- Formulaire -->
@@ -13,17 +20,17 @@
             <input type="hidden" :value="date_article">
             <div class="form-group row">
               <label for="title">Titre de l'article</label>
-              <input v-model="form.title" class="form-control" placeholder="titre de l'article" type="text" name="title" id="title">
+              <input required v-model="form.title" class="form-control" placeholder="titre de l'article" type="text" name="title" id="title">
             </div>
             <div class="form-group row">
               <label for="paragraphe">Paragraphe de l'article</label>
-              <textarea v-model="form.paragraphe" class="form-control" placeholder="Description de l'article"  name="paragraphe" id="paragraphe" rows="4" cols="40"></textarea>
+              <textarea required v-model="form.paragraphe" class="form-control" placeholder="Description de l'article"  name="paragraphe" id="paragraphe" rows="4" cols="40"></textarea>
             </div>
             <div class="form-group row">
               <img @click="openUpload" style="width: 15em; height:15em;border: 1px solid black" @dragover.prevent @drop="dropUpload" :src="imagePreview">
-              <input @change="handleFileSelected" type="file" id="file-field" style="display: none" name="image">
+              <input required @change="handleFileSelected" type="file" id="file-field" style="display: none" name="image">
             </div>
-            <button @click.prevent="formSave()" class="btn btn-primary" type="submit">Enregister</button>
+            <button @click="formSave()" class="btn btn-primary" type="submit">Enregister</button>
             <!-- Ajout d'un bouton reset -->
             <button @click.prevent="resetForm()" class="btn btn-warning" type="submit" name="button">Réinitialiser le formulaire</button>
           </form>
@@ -127,7 +134,7 @@ export default {
   data () {
     return {
       blog_msg: 'Formulaire',
-      imagePreview: '../assets/default_image.jpg',
+      imagePreview: '',
       date_article: new Date().toLocaleDateString(),
       form: [
         {
@@ -247,3 +254,9 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+.nav-blog {
+  position: relative;
+}
+</style>
