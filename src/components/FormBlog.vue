@@ -11,9 +11,9 @@
         <router-link to="/admin/FormBlog" class="nav-link nav-link-admin">Admin</router-link>
       </li>
     </ul>
-    <div class="container">
+    <div class="container container-form-vue">
       <div class="row">
-        
+
         <!-- Formulaire -->
         <div class="col-md-6">
           <h3>Ajouter un article</h3></br>
@@ -30,17 +30,21 @@
             <div class="form-group row">
               <img @click="openUpload" style="width: 15em; height:15em;border: 1px solid black" @dragover.prevent @drop="dropUpload" :src="imagePreview">
               <input required @change="handleFileSelected" type="file" id="file-field" style="display: none" name="image">
+              <p class="img-details font-weight-light">
+                Pour ajouter une image : <br>
+                Vous pouvez faire un glisser-déposer ou cliquez sur le carré pour cherche une image.
+              </p>
             </div>
-            <button @click="formSave()" class="btn btn-primary" type="submit">Enregister</button>
+            <button @click="formSave()" class="btn btn-primary btn-form-save" type="submit">Enregister</button>
             <!-- Ajout d'un bouton reset -->
-            <button @click.prevent="resetForm()" class="btn btn-warning" type="submit" name="button">Réinitialiser le formulaire</button>
+            <button @click.prevent="resetForm()" class="btn btn-warning btn-form-reset" type="submit" name="button">Réinitialiser le formulaire</button>
           </form>
         </div>
 
         <!-- Rendu formulaire html -->
         <div class="col-md-6">
-          <h3>Rendu sur le site</h3>
-          <div class="card" style="width: auto">
+          <h3>Rendu sur le site</h3><br>
+          <div class="card" style="width: auto; max-height:286px">
             <img class="card-img-top" :src="imagePreview" alt="">
             <div class="card-body">
               <h5 class="card-title">{{ form.title }}</h5>
@@ -262,7 +266,28 @@ export default {
 </script>
 
 <style scoped>
+#formBlog{
+  background-color: #fff;
+  height: 100%;
+}
 .nav-blog {
   position: relative;
+}
+.container-form-vue {
+  margin: 45px auto 45px auto;
+}
+.btn-form-save {
+  left: 0;
+  position: absolute;
+  margin: 15px auto 15px auto;
+}
+.btn-form-reset {
+  margin: 15px auto 15px auto;
+}
+.img-details {
+  position: absolute;
+  right: 0;
+  width: 40%;
+  text-align: left;
 }
 </style>
