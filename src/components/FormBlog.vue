@@ -34,7 +34,7 @@
                 Vous pouvez faire un glisser-déposer ou cliquez sur le carré pour cherche une image.
               </p>
             </div>
-            <button @click="formSave()" class="btn btn-primary btn-form-save" type="submit">Enregister</button>
+            <button @click.prevent="formSave()" class="btn btn-primary btn-form-save" type="submit">Enregister</button>
             <!-- Ajout d'un bouton reset -->
             <button @click.prevent="resetForm()" class="btn btn-warning btn-form-reset" type="submit" name="button">Réinitialiser le formulaire</button>
           </form>

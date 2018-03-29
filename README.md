@@ -5,3 +5,6 @@ Mon blog avec Vue JS et liaison de données avec Firebase
 
 ## NodeJS execution application
 npm run dev
+
+## Rendu des articles en Front
+![Alt text](/src/assets/screenshot-article-blog.png)
