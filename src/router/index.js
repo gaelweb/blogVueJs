@@ -2,7 +2,6 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import HelloWorld from '@/components/HomeBlog'
 import FormBlog from '@/components/FormBlog'
-// import BackOffice from '@/components/BackOffice'
 
 Vue.use(Router)
 

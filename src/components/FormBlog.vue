@@ -13,9 +13,8 @@
     </ul>
     <div class="container container-form-vue">
       <div class="row">
-
         <!-- Formulaire -->
-        <div class="col-md-6">
+        <div class="col-md-6 offset-md-3">
           <h3>Ajouter un article</h3></br>
           <form id="form-blog">
             <input type="hidden" :value="date_article">
@@ -40,19 +39,25 @@
             <button @click.prevent="resetForm()" class="btn btn-warning btn-form-reset" type="submit" name="button">Réinitialiser le formulaire</button>
           </form>
         </div>
+      </div>
+    </div>
 
+    <div class="container">
+      <h2>Rendu du formulaire</h2>
+      <div class="row row-article">
         <!-- Rendu formulaire html -->
         <div class="col-md-6">
-          <h3>Rendu sur le site</h3><br>
-          <div class="card" style="width: auto; max-height:286px">
-            <img class="card-img-top" :src="imagePreview" alt="">
-            <div class="card-body">
-              <h5 class="card-title">{{ form.title }}</h5>
-              <p class="card-text">{{ form.paragraphe }}</p>
+          <div class="img-article" :style="{ backgroundImage : 'url('+ imagePreview +')'}"></div>
+        </div>
+        <!-- <div class="col-md-6"> -->
+          <div class="content-article col-md-6">
+            <h5 class="card-title title-article">{{ form.title }}</h5>
+            <p class="card-text text-article">{{ form.paragraphe }}</p>
+            <div class="sup-article">
+              <span>Publié le: {{ date_article }}</span><br>
             </div>
           </div>
-        </div>
-
+        <!-- </div> -->
       </div>
     </div>
 
@@ -289,5 +294,40 @@ export default {
   right: 0;
   width: 40%;
   text-align: left;
+}
+.img-article {
+  height: 100%;
+  width: 100%;
+  min-height: 380px;
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+}
+.row-article {
+  /* padding-top: 50px;
+  padding-bottom: 50px; */
+  padding: 50px 0px 50px 0px;
+  white-space: pre-wrap;
+  border: 1px solid #80808026;
+  margin: 55px 0 55px 0;
+}
+.title-article {
+  border-bottom: 1px solid gray;
+  padding: 16px;
+  text-transform: uppercase;
+}
+.text-article {
+  text-align: justify;
+}
+.sup-article {
+  width: 100%;
+  border-top: 1px solid gray;
+  position: relative;
+  min-height: 60px;
+}
+.sup-article > span {
+  position: absolute;
+  right: 8px;
+  padding: 8px 0 0 0
 }
 </style>

@@ -126,7 +126,8 @@ header {
 .img-article {
   height: 100%;
   width: 100%;
-  background-size: contain;
+  min-height: 380px;
+  background-size: cover;
   background-position: center center;
   background-repeat: no-repeat;
 }
