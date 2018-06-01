@@ -13,4 +13,4 @@ npm run dev
 ![Alt text](/src/assets/screnshot_blog_vue_1.png)
 
 ## Back-end du blog liste des articles publiés
-![Alt text](/src/assets/screnshot_blog_vue_1.png)
+![Alt text](/src/assets/screnshot_blog_vue_2.png)
