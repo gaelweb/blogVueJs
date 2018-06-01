@@ -1,5 +1,4 @@
 <template>
-
   <!-- Formulaire d'ajout des articles -->
   <div id="formBlog">
     <!-- Notifications du nombre d'articles publiés -->

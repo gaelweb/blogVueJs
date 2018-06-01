@@ -35,9 +35,6 @@
       </div>
     </div>
   </section>
-
-
-
 </template>
 
 <script>
@@ -48,7 +45,7 @@ export default {
   name: 'HomeBlog',
   data () {
     return {
-      msg: 'Bienvenue sur le blog'
+      msg: 'Bienvenue sur le blog',
     }
   }
 }

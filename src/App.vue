@@ -1,13 +1,5 @@
 <template>
   <div id="app">
-    <!-- <ul class="nav nav-blog">
-      <li class="nav-item">
-        <router-link to="/" class="nav-link">Home</router-link>
-      </li>
-      <li class="nav-item">
-        <router-link to="/admin/FormBlog" class="nav-link nav-link-admin">Admin</router-link>
-      </li>
-    </ul> -->
     <router-view></router-view>
   </div>
 </template>
